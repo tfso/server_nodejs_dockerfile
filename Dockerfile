@@ -1,4 +1,2 @@
-FROM ubuntu:latest
-RUN apt-get update && apt-get install -y nodejs npm \
- && apt-get clean \
- && rm -rf /var/lib/apt/lists/*
+FROM mhart/alpine-node:latest
+RUN ln -s /usr/bin/node /usr/bin/nodejs
