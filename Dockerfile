@@ -13,8 +13,6 @@ RUN chown -R node:node /usr/lib/node_modules
 RUN chown -R node:node /usr/bin/node-gyp
 RUN chown -R node:node /usr/bin/npm-start
 
-USER node
-
 WORKDIR /docker
 
 COPY --chown=node:node startup.sh .
@@ -28,4 +26,7 @@ RUN apk add --no-cache w3m p7zip jq
 
 WORKDIR /docker/src
 
+RUN chown -R node:node /docker
+
+USER node
 ENTRYPOINT ["bash","/docker/startup.sh"]
