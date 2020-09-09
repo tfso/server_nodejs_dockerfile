@@ -4,11 +4,16 @@ FROM mhart/alpine-node:14.8
 RUN apk update \
 	&& apk add bash gcc g++ make python git openssh && rm -rf /var/cache/apk/*
 
+RUN addgroup -S node && adduser -S node -G node
+
+USER node
+
 RUN npm install -g node-gyp
 RUN npm install -g npm-start
 
 WORKDIR /docker
-COPY startup.sh .
+
+COPY --chown=node:node startup.sh .
 
 # give all execution rights
 RUN chmod a+x startup.sh
@@ -20,5 +25,3 @@ RUN apk add --no-cache w3m p7zip jq
 WORKDIR /docker/src
 
 ENTRYPOINT ["bash","/docker/startup.sh"]
-
-
