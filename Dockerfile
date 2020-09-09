@@ -6,10 +6,8 @@ RUN apk update \
 
 RUN addgroup -S node && adduser -S node -G node
 
-USER node
-
-RUN sudo npm install -g node-gyp
-RUN sudo npm install -g npm-start
+RUN npm install -g node-gyp
+RUN npm install -g npm-start
 
 RUN chown -R node:node /usr/lib/node_modules
 RUN chown -R node:node /usr/bin/node-gyp
@@ -25,6 +23,8 @@ RUN chmod a+x startup.sh
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
 RUN apk add --no-cache w3m p7zip jq
+
+USER node
 
 WORKDIR /docker/src
 
