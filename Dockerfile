@@ -6,12 +6,14 @@ RUN apk update \
 
 RUN addgroup -S node && adduser -S node -G node
 
-RUN chown -R node:node /usr/lib/node_modules
-
 USER node
 
-RUN npm install -g node-gyp
-RUN npm install -g npm-start
+RUN sudo npm install -g node-gyp
+RUN sudo npm install -g npm-start
+
+RUN chown -R node:node /usr/lib/node_modules
+RUN chown -R node:node /usr/bin/node-gyp
+RUN chown -R node:node /usr/bin/npm-start
 
 WORKDIR /docker
 
