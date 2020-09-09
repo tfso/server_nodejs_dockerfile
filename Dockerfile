@@ -13,6 +13,8 @@ RUN chown -R node:node /usr/lib/node_modules
 RUN chown -R node:node /usr/bin/node-gyp
 RUN chown -R node:node /usr/bin/npm-start
 
+USER node
+
 WORKDIR /docker
 
 COPY --chown=node:node startup.sh .
@@ -23,8 +25,6 @@ RUN chmod a+x startup.sh
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories
 RUN echo http://dl-cdn.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories
 RUN apk add --no-cache w3m p7zip jq
-
-USER node
 
 WORKDIR /docker/src
 
