@@ -1,4 +1,4 @@
-FROM mhart/alpine-node:12.13.1
+FROM mhart/alpine-node:8.9.1
 
 #Install packages
 RUN apk update \
